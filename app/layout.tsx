@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/next";
+import { site } from "./site";
 import { Geist_Mono, Manrope, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 
@@ -23,9 +25,10 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Paul Emas — Senior Frontend Engineer",
-  description:
-    "Senior Frontend Engineer with 6+ years of experience building scalable fintech, SaaS and AI-powered products with React, TypeScript, Next.js and Vue.",
+  metadataBase: new URL(site.url),
+  title: site.title,
+  description: site.description,
+  verification: { google: process.env.GOOGLE_SITE_VERIFICATION },
   applicationName: "Paul Emas Portfolio",
   authors: [{ name: "Paul Emas" }],
   keywords: [
@@ -40,18 +43,17 @@ export const metadata: Metadata = {
     "AI-powered products",
   ],
   openGraph: {
-    title: "Paul Emas — Senior Frontend Engineer",
-    description:
-      "Senior Frontend Engineer with 6+ years of experience building scalable fintech, SaaS and AI-powered products with React, TypeScript, Next.js and Vue.",
+    title: site.title,
+    description: site.description,
+    url: site.url,
     type: "website",
     locale: "en_GB",
     siteName: "Paul Emas",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Paul Emas — Senior Frontend Engineer",
-    description:
-      "Senior Frontend Engineer with 6+ years of experience building scalable fintech, SaaS and AI-powered products with React, TypeScript, Next.js and Vue.",
+    title: site.title,
+    description: site.description,
   },
   robots: {
     index: true,
@@ -67,6 +69,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="min-h-full flex flex-col bg-background text-foreground">
         {children}
+        <Analytics />
       </body>
     </html>
   );

@@ -15,8 +15,8 @@ export function IntroSplash() {
       return () => window.clearTimeout(hideTimer);
     }
 
-    const exitTimer = window.setTimeout(() => setState("exit"), 650);
-    const hideTimer = window.setTimeout(() => setState("hidden"), 1100);
+    const exitTimer = window.setTimeout(() => setState("exit"), 1250);
+    const hideTimer = window.setTimeout(() => setState("hidden"), 1650);
 
     return () => {
       window.clearTimeout(exitTimer);
@@ -30,8 +30,16 @@ export function IntroSplash() {
 
   return (
     <div aria-hidden="true" className="intro-splash" data-state={state}>
-      <p className="font-display text-4xl tracking-tighter text-(--ink) sm:text-6xl">
-        Paul Emas
+      <p className="intro-name font-display text-4xl tracking-tighter text-(--ink) sm:text-6xl">
+        {Array.from("Paul Emas").map((letter, index) => (
+          <span
+            key={index}
+            className="intro-name-letter"
+            style={{ animationDelay: `${index * 55}ms` }}
+          >
+            {letter === " " ? "\u00a0" : letter}
+          </span>
+        ))}
       </p>
     </div>
   );
