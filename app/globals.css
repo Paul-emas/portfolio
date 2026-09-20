@@ -1,0 +1,139 @@
+@import "tailwindcss";
+
+:root {
+  --primary: #0a0a0a;
+  --primary-active: #1f1f1f;
+  --ink: #0a0a0a;
+  --body: #3a3a3a;
+  --body-strong: #1a1a1a;
+  --muted: #6a6a6a;
+  --muted-soft: #9a9a9a;
+  --hairline: #e5e5e5;
+  --hairline-soft: #f0f0f0;
+  --canvas: #fffaf0;
+  --surface-soft: #faf5e8;
+  --surface-card: #f5f0e0;
+  --surface-strong: #ebe6d6;
+  --on-primary: #ffffff;
+  --on-dark: #ffffff;
+  --brand-teal: #1a3a3a;
+  --brand-lavender: #b8a4ed;
+  --brand-peach: #ffb084;
+  --brand-ochre: #e8b94a;
+  --brand-coral: #ff6b5a;
+  --background: var(--canvas);
+  --foreground: var(--ink);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-manrope);
+  --font-display: var(--font-space-grotesk);
+  --font-mono: var(--font-geist-mono);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--body);
+  font-family: var(--font-manrope), sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+a {
+  text-underline-offset: 0.2em;
+}
+
+::selection {
+  background: color-mix(in oklab, var(--brand-peach) 58%, white);
+  color: var(--ink);
+}
+
+.button-primary,
+.button-secondary {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 0.75rem;
+  border: 1px solid transparent;
+  padding: 0.75rem 1.125rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease,
+    transform 180ms ease;
+}
+
+.button-primary {
+  background: var(--primary);
+  color: var(--on-primary);
+}
+
+.button-primary:hover {
+  background: var(--primary-active);
+}
+
+.button-secondary {
+  border-color: var(--hairline);
+  background: var(--canvas);
+  color: var(--ink);
+}
+
+.button-secondary:hover {
+  border-color: color-mix(in oklab, var(--ink) 20%, var(--hairline));
+  background: var(--surface-card);
+}
+
+.button-primary:focus-visible,
+.button-secondary:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px color-mix(in oklab, var(--brand-teal) 35%, white);
+}
+
+.intro-splash {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: grid;
+  place-items: center;
+  background: var(--canvas);
+  transition:
+    opacity 320ms ease,
+    transform 320ms ease,
+    visibility 320ms ease;
+}
+
+.intro-splash[data-state="visible"] {
+  opacity: 1;
+  visibility: visible;
+}
+
+.intro-splash[data-state="exit"] {
+  opacity: 0;
+  transform: scale(1.02);
+  visibility: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
